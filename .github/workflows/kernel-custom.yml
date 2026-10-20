@@ -29,8 +29,8 @@ on:
           - SukiSU
           - SukiSU(40726)
           - SukiSU(40548)
-          - ReSukiSU
-        default: ReSukiSU
+          - BakaSU
+        default: BakaSU
       ksu_mode:
         description: "KernelSU / SUSFS 模式"
         required: true
@@ -102,6 +102,11 @@ on:
         default: false
       use_nomount:
         description: "启用 NoMount 挂载元模块"
+        required: false
+        type: boolean
+        default: false
+      use_networking:
+        description: "启用网络增强（BBRv3 / IPSet / Qdisc / CIFS）"
         required: false
         type: boolean
         default: false
@@ -215,6 +220,7 @@ jobs:
       use_kpm: ${{ inputs.use_kpm }}
       use_rekernel: ${{ inputs.use_rekernel || false }}
       use_nomount: ${{ inputs.use_nomount || false }}
+      use_networking: ${{ inputs.use_networking || false }}
       cve_2026_43499_patch: ${{ inputs.cve_2026_43499_patch }}
       supp_op: ${{ inputs.supp_op || false }}
       enable_susfs: ${{ inputs.ksu_mode != '禁用SUSFS' && inputs.ksu_mode != '禁用KSU' }}
